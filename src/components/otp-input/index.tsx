@@ -28,11 +28,17 @@ const OtpInput: React.FC<OtpInputProps> = ({ length, onOtpSubmit }) => {
     //submit trigger
     const combinedOtp = newOpt.join("");
     if (combinedOtp.length === length) onOtpSubmit(combinedOtp);
+
+    //move to next input of current input is filled
+    if (value && index < length - 1 && inputRefs.current[index + 1]) {
+      const nextItem = inputRefs.current[index + 1] as HTMLInputElement;
+      nextItem.focus();
+    }
   };
 
   const handleClick = () => {};
   const handleKeyDown = (index: number, e: any) => {};
-  console.log("refs", inputRefs);
+
   return (
     <div>
       {otp?.map((value, index) => {
